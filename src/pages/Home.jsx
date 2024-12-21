@@ -1,50 +1,52 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { fetchRestaurants } from '../api/apiService';
 import Loader from '../components/Loader';
-import './Home.css'; 
+import './Home.css';
 
 const Home = () => {
   const [restaurants, setRestaurants] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const token = localStorage.getItem('token');
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const token = localStorage.getItem('token');
-        if (!token) {
-          alert('Please log in first!');
-          return;
-        }
-        const response = await fetchRestaurants(token);
-        setRestaurants(response.data); 
-      } catch (error) {
-        console.error('Error fetching restaurants:', error);
-        alert('Failed to fetch restaurants. Please try again later.');
-      } finally {
-        setLoading(false);
-      }
-    };
+    if (token) {
+      fetchData();
+    } else {
+      setError('Please log in to view restaurants');
+    }
+  }, [token]);
 
-    fetchData();
-  }, []);
+  const fetchData = async () => {
+    setLoading(true);
+    setError(null);
 
-  if (loading) {
-    return <Loader />;
-  }
+    try {
+      const data = await fetchRestaurants(token);
+      setRestaurants(data);
+    } catch (error) {
+      setError('Failed to fetch restaurants');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <div className="grid">
-      {restaurants.map((restaurant) => (
-        <div key={restaurant.restaurant_id} className="card">
-          <h3 className="cardTitle">{restaurant.restaurant_name}</h3>
-          <p className="cardDescription">
-            {restaurant.location.city}, {restaurant.location.state}
-          </p>
-        </div>
-      ))}
+    <div className="homeContainer">
+      <h2>Restaurants</h2>
+      {loading && <Loader />}
+      {error && <div className="error">{error}</div>}
+      <ul>
+        {restaurants && restaurants.length > 0 ? (
+          restaurants.map((restaurant) => (
+            <li key={restaurant.id}>{restaurant.name}</li>
+          ))
+        ) : (
+          <p>No restaurants available</p>
+        )}
+      </ul>
     </div>
   );
 };
 
 export default Home;
-

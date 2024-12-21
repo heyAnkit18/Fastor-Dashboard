@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { loginUser } from '../api/apiService'; 
+import { loginUser } from '../api/apiService';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
 
@@ -7,11 +7,14 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setError(null);
+
     try {
       const response = await loginUser({ email, password });
       const token = response.data.token;
@@ -19,7 +22,7 @@ const Login = () => {
       alert('Login successful!');
       navigate('/');
     } catch (error) {
-      alert('Login failed. Please check your credentials.');
+      setError('Login failed. Please check your credentials.');
     } finally {
       setLoading(false);
     }
@@ -29,6 +32,7 @@ const Login = () => {
     <div className="loginContainer">
       <h2>Login</h2>
       <form onSubmit={handleSubmit} className="loginForm">
+        {error && <div className="error">{error}</div>}
         <input
           type="email"
           placeholder="Email"
@@ -45,11 +49,7 @@ const Login = () => {
           className="inputField"
           required
         />
-        <button
-          type="submit"
-          className="loginButton"
-          disabled={loading}
-        >
+        <button type="submit" className="loginButton" disabled={loading}>
           {loading ? 'Logging in...' : 'Login'}
         </button>
       </form>

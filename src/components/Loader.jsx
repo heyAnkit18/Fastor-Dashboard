@@ -1,11 +1,8 @@
-// src/components/Loader.jsx
-
 import React from 'react';
+import './Loader.css';
 
-const Loader = () => (
-  <div className="loader">
-    <div className="spinner"></div>
-  </div>
-);
+const Loader = () => {
+  return <div className="loader">Loading...</div>;
+};
 
 export default Loader;
