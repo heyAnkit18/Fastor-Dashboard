@@ -4,6 +4,7 @@
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
+  background-color: #fff;
 }
 
 .inputField {
@@ -21,10 +22,44 @@
   color: white;
   border: none;
   border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.loginButton:hover {
+  background-color: #0056b3;
 }
 
 .error {
   color: red;
   font-size: 14px;
   margin-bottom: 10px;
+}
+
+/* Media Query for smaller devices (mobile) */
+@media (max-width: 768px) {
+  .loginContainer {
+    width: 250px;
+    padding: 15px;
+  }
+
+  .inputField, .loginButton {
+    padding: 12px;
+  }
+}
+
+/* Media Query for very small devices (portrait mobile) */
+@media (max-width: 480px) {
+  .loginContainer {
+    width: 90%;
+    padding: 10px;
+  }
+
+  .inputField, .loginButton {
+    padding: 12px;
+  }
+
+  .error {
+    font-size: 12px;
+  }
 }
