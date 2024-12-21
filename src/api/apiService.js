@@ -42,7 +42,7 @@ export const loginUser = async (credentials) => {
 };
 export const fetchRestaurants = async (token) => {
   try {
-    const response = await fetch('https://staging.fastor.ai/api/v1/restaurants', {
+    const response = await fetch('https://staging.fastor.ai/v1/m/restaurant?city_id=118&&', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

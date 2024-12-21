@@ -10,14 +10,6 @@
 
 .navbar ul {
   display: flex;
-  justify-content: space-around;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-.navbar ul {
-  display: flex;
   justify-content: space-between;
   list-style-type: none;
   margin: 0;
@@ -26,7 +18,7 @@
 }
 
 .navbar ul li {
-  margin: 0 10px; /* Adds space between the links */
+  margin: 0 10px;
 }
 
 .navbar ul li a {
@@ -40,7 +32,6 @@
   display: inline-block;
 }
 
-
 .navbar ul li a:hover {
   background-color: #e51313;
   color: #fff;
@@ -51,4 +42,37 @@
   background-color: #e51313;
   color: white;
 }
+
+/* Media Query for small devices (mobile) */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    padding: 12px;
+  }
+
+  .navbar ul {
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    padding: 0;
+  }
+
+  .navbar ul li {
+    margin: 8px 0;
+  }
+
+  .navbar ul li a {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+}
+
+/* Media Query for very small devices (portrait mobile) */
+@media (max-width: 480px) {
+  .navbar ul li a {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+}
+
 
