@@ -8,6 +8,8 @@
 
 ul {
   list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
 
 li {
@@ -15,5 +17,38 @@ li {
   background-color: #f9f9f9;
   margin: 5px 0;
   border-radius: 4px;
+  transition: background-color 0.3s, transform 0.3s;
 }
 
+li:hover {
+  background-color: #f1f1f1;
+  transform: scale(1.02);
+}
+
+/* Media Query for small devices (mobile) */
+@media (max-width: 768px) {
+  .homeContainer {
+    padding: 15px;
+  }
+
+  li {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
+
+/* Media Query for very small devices (portrait mobile) */
+@media (max-width: 480px) {
+  .homeContainer {
+    padding: 10px;
+  }
+
+  li {
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  .error {
+    font-size: 14px;
+  }
+}
