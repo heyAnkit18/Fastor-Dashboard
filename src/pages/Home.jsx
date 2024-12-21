@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { fetchRestaurants } from '../api/apiService';
 import Loader from '../components/Loader';
-// import './Home.css'; 
+import './Home.css'; 
 
 const Home = () => {
   const [restaurants, setRestaurants] = useState([]);
